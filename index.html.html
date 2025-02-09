@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <style>
+ * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background: linear-gradient(45deg, #000022, #000044, #000066, #000055, #000022);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    color: #000000;
+    margin: 0;
+}
+
+h1 {
+    font-size: 2.5rem;
+    background: linear-gradient(45deg, #8B6508, #C09040, #FFD27F, #E6B14C, #8B6508);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+    text-shadow: 1px 1px 5px rgba(139, 101, 8, 0.5);
+    margin-bottom: 15px;
+}
+
+.game-mode-selection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    background: linear-gradient(45deg, #000022, #000044, #000066, #000055, #000022);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgb(250, 183, 0);
+    text-align: center;
+}
+
+p {
+    font-size: 1.2rem;
+    color: #8B6508;
+    margin-bottom: 20px;
+}
+
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.button {
+    padding: 15px;
+    color: #8B6508;
+    background: linear-gradient(45deg, #000022, #000044, #000066, #000055, #000022);
+    border-color:#8B6508;
+    border-width: 2px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 200px;
+    margin: 0 auto;
+}
+
+.button:hover {
+    background: linear-gradient(45deg, #8B6508, #C09040, #FFD27F, #E6B14C, #8B6508);
+    transform: scale(1.08);
+    color:#000030;
+    box-shadow: 0px 4px 10px rgba(139, 101, 8, 0.6);
+}
+
+.footer {
+    background-color:#000022;
+    color: #363636;
+    text-align: center;
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+footer p {
+    margin: 0;
+}
+
+    </style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIND OF A GENIUS</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <body>
+        <div class="game-mode-selection">
+            <img src="https://i.imgur.com/SrQGvqQ.png" alt="Mind Of A Genius" width="300">
+            <h1>Escolha o Modo de Jogo</h1>
+            <p>Escolha o modo que você quer jogar:</p>
+            <div class="buttons-container">
+                <button class="button" onclick="location.href='MOAG-Singleplayer.html'">Modo Singleplayer</button>
+                <button class="button" onclick="location.href='MOAG - 1v1.html'">Modo 2 Jogadores</button>
+            </div>
+        </div>
+    
+
+    <footer class="footer">
+        <p>&copy; 2025 Mind Of A Genius V:1.1 | Criado por Raphael Ferracioli</p>
+    </footer>
+</body>
+</html>

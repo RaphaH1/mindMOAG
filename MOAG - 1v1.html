@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mind Of A Genius</title>
+    <style>
+        
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background: linear-gradient(45deg, #000022, #000044, #000066, #000055, #000022);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    color: #ffffff; /* Texto branco */
+}
+
+h1 {
+    font-size: 2.0rem;
+    background: linear-gradient(45deg, #8B6508, #C09040, #FFD27F, #E6B14C, #8B6508); /* Gradiente dourado metálico */
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+h1 img {
+    transform: translateY(33px);
+}
+
+div {
+    width: 90%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.button {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg, #000022, #000044, #000066, #000055, #000022);
+    border-color:#8B6508;
+    color: #ac7e0c;
+    border-radius: 2px;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button:hover {
+    background: linear-gradient(45deg, #8B6508, #C09040, #FFD27F, #E6B14C, #8B6508);
+    transform: scale(1.08);
+    color:#000030;
+    box-shadow: 0px 4px 10px rgba(139, 101, 8, 0.6);
+}
+
+.button:focus {
+    outline: none;
+}
+
+.question-container {
+    transform: translateX(11px);
+    display: none;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #000022;
+    background: linear-gradient(45deg, #c0c0c0, #d3d3d3, #e0e0e0, #b0b0b0);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(139, 101, 8, 0.7); /* Brilho dourado ao redor */
+}
+
+.question-container #options{
+    transform: translateX(-2px);
+}
+
+.question-container button {
+    transform: translateX(-9px);
+}
+
+#question {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+#options {
+    margin-bottom: 20px;
+}
+
+button.button {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#message {
+    font-size: 1.2rem;
+    margin-top: 20px;
+    color:#000030;
+    font-weight: bold;
+}
+
+#final-score {
+    transform: translateX(11px);
+    display: none;
+    background: linear-gradient(45deg, #8B6508, #C09040, #FFD27F, #E6B14C, #8B6508);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#score-message {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 1.5rem;
+    color:#000050;
+}
+
+input[type="number"] {
+    background: linear-gradient(45deg, #8B6508, #C09040, #FFD27F, #E6B14C, #8B6508);
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ffbb00;
+    border-radius: 5px;
+    margin-right: 10px;
+    width: 60px;
+}
+
+input[type="text"] {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background: linear-gradient(45deg, #8B6508, #C09040, #FFD27F, #E6B14C, #8B6508);
+    border-radius: 5px;
+    color: #00003f;
+}
+
+#rounds-selection {
+    margin-top: 20px;
+    color: #b8870b;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+footer {
+    display: flex;
+    justify-content:right;
+    align-items: center; /* Alinha verticalmente */
+    padding: 10px;
+    color: rgb(219, 161, 0);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+
+    </style>
+</head>
+<body>
+    <h1>Mind Of A Genius
+    </h1>
+
+    <div>
+        <button class="button" onclick="chooseDifficulty('easy')">Fácil</button>
+        <button class="button" onclick="chooseDifficulty('medium')">Médio</button>
+        <button class="button" onclick="chooseDifficulty('hard')">Difícil</button>
+        <button class="button" onclick="chooseDifficulty('impossible')">Impossível</button>
+    </div>
+
+    <div id="rounds-selection" style="display: none;">
+        <label for="rounds">Escolha o número de rodadas: </label>
+        <input type="number" id="rounds" min="1" max="10" value="1">
+
+        <div>
+            <label for="player1-name">Nome do Jogador 1: </label>
+            <input type="text" id="player1-name" placeholder="" required>
+        </div>
+        <div>
+            <label for="player2-name">Nome do Jogador 2: </label>
+            <input type="text" id="player2-name" placeholder="" required>
+        </div>
+        
+        <button class="button" onclick="startGame()">Começar</button>
+    </div>
+
+    <div class="question-container" id="question-container" style="display: none;">
+        <p id="question"></p>
+        <div id="options"></div>
+        <div id="current-player"></div>
+        <button class="button" onclick="nextQuestion()">Próxima Pergunta</button>
+        <div id="message"></div>
+    </div>
+
+
+    <div id="final-score" style="display: none;">
+        <p id="score-message"></p>
+        <button class="button" onclick="restartGame()">Jogar Novamente</button>
+    </div>
+
+    <footer>
+        <img src="https://i.imgur.com/SrQGvqQ.png" alt="Mind Of A Genius" width="80">
+        <p>Criado por Raphael Ferracioli</p>
+    </footer>
+
+    <script>
+        const questions = {
+            easy: [
+                { question: "Qual é a capital do Brasil?", options: ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador"], answer: "Brasília" },
+                { question: "Quanto é 2 + 2?", options: ["3", "4", "5", "6"], answer: "4" },
+                { question: "Qual é a cor do céu?", options: ["Verde", "Azul", "Amarelo", "Cinza"], answer: "Azul" },
+                { question: "Qual é o maior animal terrestre?", options: ["Elefante", "Girafa", "Leão", "Hipopótamo"], answer: "Elefante" },
+                { question: "Qual é a língua oficial do Brasil?", options: ["Português", "Espanhol", "Inglês", "Francês"], answer: "Português" },
+                { question: "Quantos estados tem o Brasil?", options: ["25", "26", "27", "28"], answer: "26" },
+                { question: "Qual é o planeta mais próximo do Sol?", options: ["Vênus", "Mercúrio", "Terra", "Marte"], answer: "Mercúrio" },
+                { question: "Quantos dias tem um ano?", options: ["360", "365", "366", "370"], answer: "365" },
+                { question: "Quem descobriu o Brasil?", options: ["Pedro Álvares Cabral", "Cristóvão Colombo", "Vasco da Gama", "Fernão de Magalhães"], answer: "Pedro Álvares Cabral" },
+                { question: "Qual é a estação do ano mais quente?", options: ["Outono", "Verão", "Inverno", "Primavera"], answer: "Verão" },
+                { question: "Qual é o maior país do mundo?", options: ["Brasil", "Estados Unidos", "Rússia", "China"], answer: "Rússia" },
+                { question: "Qual é o animal símbolo do Brasil?", options: ["Onça-pintada", "Arara", "Tucano", "Cavalo-marinho"], answer: "Onça-pintada" },
+                { question: "Em que continente está o Egito?", options: ["África", "Ásia", "América", "Europa"], answer: "África" },
+                { question: "Em que cidade está o Cristo Redentor?", options: ["São Paulo", "Salvador", "Rio de Janeiro", "Belo Horizonte"], answer: "Rio de Janeiro" },
+                { question: "Quantas cores tem o arco-íris?", options: ["5", "6", "7", "8"], answer: "7" }
+            ],
+            medium: [
+                { question: "Quem escreveu 'Dom Casmurro'?", options: ["Machado de Assis", "José de Alencar", "Clarice Lispector", "Monteiro Lobato"], answer: "Machado de Assis" },
+                { question: "Qual é o maior planeta do sistema solar?", options: ["Júpiter", "Saturno", "Terra", "Urano"], answer: "Júpiter" },
+                { question: "Em que ano o Brasil foi descoberto?", options: ["1400", "1500", "1600", "1700"], answer: "1500" },
+                { question: "Quem foi o primeiro presidente do Brasil?", options: ["Getúlio Vargas", "Marechal Deodoro da Fonseca", "Juscelino Kubitschek", "Dom Pedro II"], answer: "Marechal Deodoro da Fonseca" },
+                { question: "Qual é a capital da França?", options: ["Londres", "Paris", "Berlim", "Roma"], answer: "Paris" },
+                { question: "Qual é o elemento químico com o símbolo 'O'?", options: ["Oxigênio", "Ouro", "Osmium", "Oganessônio"], answer: "Oxigênio" },
+                { question: "Qual é o continente mais populoso?", options: ["Ásia", "África", "Europa", "América"], answer: "Ásia" },
+                { question: "Em que ano aconteceu a Revolução Francesa?", options: ["1776", "1789", "1804", "1830"], answer: "1789" },
+                { question: "Qual é o maior oceano do mundo?", options: ["Atlântico", "Índico", "Pacífico", "Ártico"], answer: "Pacífico" },
+                { question: "Quem pintou a Mona Lisa?", options: ["Vincent van Gogh", "Pablo Picasso", "Leonardo da Vinci", "Michelangelo"], answer: "Leonardo da Vinci" },
+                { question: "Qual é a capital da Espanha?", options: ["Barcelona", "Sevilha", "Madrid", "Valência"], answer: "Madrid" },
+                { question: "Quem inventou a lâmpada?", options: ["Nikola Tesla", "Thomas Edison", "Albert Einstein", "Benjamin Franklin"], answer: "Thomas Edison" },
+                { question: "Qual é a velocidade da luz?", options: ["300.000 km/s", "150.000 km/s", "500.000 km/s", "200.000 km/s"], answer: "300.000 km/s" },
+                { question: "Quem pintou o 'Guernica'?", options: ["Pablo Picasso", "Salvador Dalí", "Claude Monet", "Edvard Munch"], answer: "Pablo Picasso" },
+                { question: "Qual é o maior rio do mundo?", options: ["Nilo", "Amazônia", "Yangtsé", "Mississippi"], answer: "Amazônia" }
+            ],
+            hard: [
+                { question: "Qual é o elemento químico com o símbolo 'Pb'?", options: ["Plutônio", "Chumbo", "Polônio", "Bário"], answer: "Chumbo" },
+                { question: "Quem foi o primeiro presidente dos EUA?", options: ["Thomas Jefferson", "George Washington", "Abraham Lincoln", "Franklin D. Roosevelt"], answer: "George Washington" },
+                { question: "Qual é o nome científico do ser humano?", options: ["Homo sapiens", "Homo habilis", "Homo erectus", "Homo neanderthalensis"], answer: "Homo sapiens" },
+                { question: "Quem escreveu 'Cem Anos de Solidão'?", options: ["Jorge Luis Borges", "Gabriel García Márquez", "Carlos Fuentes", "Mario Vargas Llosa"], answer: "Gabriel García Márquez" },
+                { question: "Qual é o valor da constante de Planck?", options: ["6.62607015×10−34 J·s", "9.8 m/s²", "3×10⁸ m/s", "1.602×10−19 C"], answer: "6.62607015×10−34 J·s" },
+                { question: "Qual é o maior número primo conhecido?", options: ["7", "11", "Mersenne prime", "101"], answer: "Mersenne prime" },
+                { question: "Qual é o nome da teoria da evolução?", options: ["Teoria da Seleção Natural", "Teoria do Big Bang", "Teoria das Cordas", "Teoria da Relatividade"], answer: "Teoria da Seleção Natural" },
+                { question: "Em que ano foi assinada a Declaração de Independência dos EUA?", options: ["1776", "1789", "1800", "1865"], answer: "1776" },
+                { question: "Qual é a fórmula da água?", options: ["H2O", "CO2", "O2", "NaCl"], answer: "H2O" },
+                { question: "Qual é o nome do maior satélite de Saturno?", options: ["Titã", "Ío", "Europa", "Ganímedes"], answer: "Titã" },
+                { question: "Quem foi o criador da teoria da relatividade?", options: ["Isaac Newton", "Galileu Galilei", "Albert Einstein", "Niels Bohr"], answer: "Albert Einstein" },
+                { question: "Qual é o maior deserto do mundo?", options: ["Sahara", "Gobi", "Antártico", "Kalahari"], answer: "Antártico" },
+                { question: "Quem é conhecido como o pai da física moderna?", options: ["Isaac Newton", "Albert Einstein", "Niels Bohr", "Galileu Galilei"], answer: "Albert Einstein" },
+                { question: "Quem pintou a 'Última Ceia'?", options: ["Leonardo da Vinci", "Michelangelo", "Pablo Picasso", "Salvador Dalí"], answer: "Leonardo da Vinci" },
+                { question: "Qual é o maior planeta do sistema solar?", options: ["Terra", "Júpiter", "Saturno", "Netuno"], answer: "Júpiter" }
+            ],
+            impossible: [
+                { question: "Qual é a solução para a equação de Schrödinger?", options: ["Psi", "E=mc²", "H2O", "N/A"], answer: "Psi" },
+                { question: "Quem foi o inventor da teoria das cordas?", options: ["Edward Witten", "Stephen Hawking", "Albert Einstein", "Richard Feynman"], answer: "Edward Witten" },
+                { question: "O que é o teorema de Fermat?", options: ["Teorema dos Números Primos", "Teoria da Relatividade", "Último Teorema de Fermat", "Teorema de Pitágoras"], answer: "Último Teorema de Fermat" },
+                { question: "Qual é a distância entre a Terra e a estrela mais próxima?", options: ["4,24 anos-luz", "1 ano-luz", "100 milhões de km", "10 bilhões de km"], answer: "4,24 anos-luz" },
+                { question: "O que é o paradoxo de Olbers?", options: ["Por que o céu é escuro à noite", "Teoria da Relatividade", "Teoria das Cordas", "Paradoxo de Fermat"], answer: "Por que o céu é escuro à noite" },
+                { question: "Quem foi o responsável pela formulação da teoria das supercordas?", options: ["Edward Witten", "Stephen Hawking", "Niels Bohr", "Galileu Galilei"], answer: "Edward Witten" },
+                { question: "Qual é a natureza das ondas gravitacionais?", options: ["Ondas espaciais", "Ondas sonoras", "Ondas eletromagnéticas", "Ondas térmicas"], answer: "Ondas espaciais" },
+                { question: "Quantos quarks existem no modelo padrão?", options: ["3", "4", "5", "6"], answer: "6" },
+                { question: "Qual é a origem da matéria escura?", options: ["Ainda desconhecida", "Buracos negros", "Partículas de antimatéria", "Quarks"], answer: "Ainda desconhecida" },
+                { question: "O que descreve a equação de campo de Einstein?", options: ["Relatividade Geral", "Mecânica Quântica", "Teoria das Cordas", "Relatividade Restrita"], answer: "Relatividade Geral" },
+                { question: "Qual é a maior galáxia observada?", options: ["IC 1101", "Via Láctea", "Andrômeda", "Messier 87"], answer: "IC 1101" },
+                { question: "Qual é a teoria que descreve a evolução do universo?", options: ["Big Bang", "Teoria da Relatividade", "Teoria das Cordas", "Mecânica Quântica"], answer: "Big Bang" },
+                { question: "Quem desenvolveu a teoria das probabilidades?", options: ["Blaise Pascal", "Pierre-Simon Laplace", "Isaac Newton", "Albert Einstein"], answer: "Blaise Pascal" },
+                { question: "O que é a constante de Hubble?", options: ["Expansão do universo", "Lei da gravidade", "Teoria da relatividade", "Teoria das cordas"], answer: "Expansão do universo" },
+                { question: "O que descreve o paradoxo de Schrödinger?", options: ["Gato de Schrödinger", "Teoria das cordas", "Relatividade Geral", "Teoria Quântica"], answer: "Gato de Schrödinger" }
+            ]
+        };
+
+        let currentDifficulty = '';
+let currentRound = 1;
+let currentQuestionIndex = 0;
+let scorePlayer1 = 0;
+let scorePlayer2 = 0;
+let totalRounds = 0;
+let currentPlayer = 1;
+let player1Name = '';
+let player2Name = '';
+
+function chooseDifficulty(difficulty) {
+    currentDifficulty = difficulty;
+    document.getElementById("rounds-selection").style.display = 'block';
+}
+
+function startGame() {
+    player1Name = document.getElementById("player1-name").value.trim();
+    player2Name = document.getElementById("player2-name").value.trim();
+
+    if (!player1Name || !player2Name) {
+        alert('Por favor, insira os nomes de ambos os jogadores!');
+        return;
+    }
+
+    totalRounds = document.getElementById("rounds").value;
+    currentRound = 1;
+    scorePlayer1 = 0;
+    scorePlayer2 = 0;
+    currentQuestionIndex = 0;
+    currentPlayer = 1;
+
+    // Embaralha as perguntas da dificuldade escolhida
+    questions[currentDifficulty] = questions[currentDifficulty].sort(() => Math.random() - 0.5);
+
+    document.getElementById("rounds-selection").style.display = 'none';
+    document.getElementById("question-container").style.display = 'block';
+    loadQuestion();
+}
+
+function loadQuestion() {
+    const question = questions[currentDifficulty][currentQuestionIndex];
+    document.getElementById("question").innerText = question.question;
+    const optionsContainer = document.getElementById("options");
+    optionsContainer.innerHTML = '';
+    question.options.forEach(option => {
+        const button = document.createElement("button");
+        button.classList.add("button");
+        button.innerText = option;
+        button.onclick = () => checkAnswer(option);
+        optionsContainer.appendChild(button);
+    });
+
+    document.getElementById("current-player").innerText = `É a vez de: ${currentPlayer === 1 ? player1Name : player2Name}`;
+    document.getElementById("message").innerText = '';
+}
+
+function checkAnswer(selectedOption) {
+    const correctAnswer = questions[currentDifficulty][currentQuestionIndex].answer;
+
+    document.getElementById("message").innerText = '';
+
+    if (selectedOption === correctAnswer) {
+        if (currentPlayer === 1) {
+            scorePlayer1++;
+        } else {
+            scorePlayer2++;
+        }
+    }
+
+    document.getElementById("message").innerText = selectedOption === correctAnswer ? 'Resposta Correta!' : `Resposta Errada! A resposta correta é: ${correctAnswer}`;
+
+    setTimeout(() => {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < totalRounds) {
+            currentPlayer = currentPlayer === 1 ? 2 : 1;
+            loadQuestion();
+        } else {
+            showScore();
+        }
+    }, 1000);
+}
+
+function showScore() {
+    document.getElementById("question-container").style.display = 'none';
+    document.getElementById("final-score").style.display = 'block';
+    document.getElementById("score-message").innerText = `${player1Name}: ${scorePlayer1} pontos | ${player2Name}: ${scorePlayer2} pontos`;
+}
+
+function restartGame() {
+    document.getElementById("final-score").style.display = 'none';
+    document.getElementById("rounds-selection").style.display = 'block';
+}
+
+
+    </script>
+
+</body>
+</html>
